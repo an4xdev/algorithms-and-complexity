@@ -1,0 +1,26 @@
+... implements Iterable<T>
+
+    @Override
+
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator implements Iterator<T> {
+        private Element<T> current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T data = current.getDane();
+            current = current.getNext();
+            return data;
+        }
+    }

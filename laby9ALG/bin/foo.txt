@@ -1,0 +1,82 @@
+// Pseudokod: Usuwanie węzła z drzewa
+procedure delete(v: ; T; var r: node);
+var
+  x, y, z, t: node;
+  b: 0 .. 1;
+{
+  x := search(v, r, y);
+  if x <> nil 
+  {
+    if (left(x) = nil) or (right(x) = nil) 
+    {
+      if (left(x) = nil) and (right(x) = nil) 
+      {
+        z := nil;
+      } 
+      else if left(x) = nil 
+      {
+        z := right(x);
+      } 
+      else 
+      {
+        z := left(x);
+      }
+
+      if y = nil 
+      {
+        r := z;
+      } 
+      else 
+      {
+        if x = left(y) 
+        {
+          left(y) := z;
+        } 
+        else 
+        {
+          right(y) := z;
+        }
+      }
+    } 
+    else 
+    {
+      b := random(2);
+      // {jeśli b=0, to w miejsce v wstawiamy element bezpośrednio
+      // poprzedzający v w zbiorze S. Jeśli b = 1, to w miejsce v wstawiamy
+      // element bezpośrednio następujący po v w zbiorze S}
+      if b = 0 
+      {
+        z := left(x);
+        if right(z) = nil 
+        {
+          left(x) := left(z);
+        } 
+        else 
+        {
+          repeat
+            t := z;
+            z := right(z);
+          until right(z) = nil;
+          right(t) := left(z);
+        }
+      } 
+      else 
+      {
+        z := right(x);
+        if left(z) = nil 
+        {
+          right(x) := right(z);
+        } 
+        else 
+        {
+          repeat
+            t := z;
+            z := left(z);
+          until left(z) = nil;
+          left(t) := right(z);
+        }
+      }
+      key(x) := key(z);
+    }
+  }
+} // delete
